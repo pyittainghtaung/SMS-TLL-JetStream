@@ -5,6 +5,7 @@ use App\Livewire\Category;
 use App\Livewire\Grade;
 use App\Livewire\Hostel;
 use App\Livewire\Permission;
+use App\Livewire\Product;
 use App\Livewire\Role;
 use App\Livewire\Section;
 use App\Livewire\User;
@@ -27,6 +28,7 @@ Route::middleware([
     Route::get('sections', Section::class)->name('sections');
     Route::get('hostels', Hostel::class)->name('hostels');
     Route::get('categories', Category::class)->name('categories');
+    Route::get('products', Product::class)->name('products');
     Route::get('permissions', Permission::class)->name('permissions');
     Route::get('roles', Role::class)->name('roles');
     Route::get('users', User::class)->name('users');

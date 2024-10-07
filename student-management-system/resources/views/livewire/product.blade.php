@@ -24,7 +24,7 @@
                             {{-- <x-primary-button type="submit">Search</x-primary-button> --}}
                         </div>
                     </div>
-                    {{-- <div class="flex justify-between border-solid border-2 border-indigo-600 p-2"> --}}
+                    {{-- < class="flex justify-between border-solid border-2 border-indigo-600 p-2"> --}}
                     <div class="flex justify-between flex-col sm:flex-row gap-2">
                         <div class="basis-1/3 rounded-lg border-solid border-2 border-green-500 p-2">
                             @if (session()->has('message'))
@@ -32,7 +32,7 @@
                                     {{ session('message') }}
                                 </div>
                             @endif
-                            <h1 class="text-center">{{ $isEdit ? 'Edit' : 'Create' }} Category</h1>
+                            <h1 class="text-center">{{ $isEdit ? 'Edit' : 'Create' }} Product</h1>
                             <form wire:submit.prevent="{{ $isEdit ? 'update' : 'store' }}"
                                 enctype="multipart/form-data">
                                 <div class="mb-4">
@@ -50,18 +50,29 @@
                                     @enderror
                                 </div>
                                 <div class="mb-4">
-                                    <label for="image" class="block">Image</label>
-                                    {{-- <input type="text" wire:model="image" class="border p-2 w-full"> --}}
-                                    <input type="file" id="image" wire:model="image" class="border p-2 w-full">
-                                    @error('image')
+                                    <label for="name" class="block">Price</label>
+                                    <input type="text" wire:model="price" class="border p-2 w-full">
+                                    @error('price')
                                         <span class="text-red-500 block">{{ $message }}</span>
                                     @enderror
                                 </div>
                                 <div class="mb-4">
-                                    <label for="is_active" class="block">Is Active</label>
-                                    {{-- Checkbox value only works with True and False (Not 1 and 0) --}}
-                                    <input type="checkbox" wire:model="is_active">
-                                    @error('is_active')
+                                    <label for="category_id" class="block">Category</label>
+                                    <select id="category_id" wire:model="category_id" class="border p-2 w-full">
+                                        <option value="">-- Select Category --</option>
+                                        @foreach ($categories as $category)
+                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('category_id')
+                                        <span class="text-red-500 block">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="mb-4">
+                                    <label for="images" class="block">Images</label>
+                                    <input type="file" id="images" wire:model="images" class="border p-2 w-full"
+                                        multiple>
+                                    @error('images')
                                         <span class="text-red-500 block">{{ $message }}</span>
                                     @enderror
                                 </div>
@@ -83,33 +94,36 @@
                                         <th class="px-6 py-3 rounded-s-lg">ID</th>
                                         <th class="px-6 py-3">Name</th>
                                         <th class="px-6 py-3">Description</th>
-                                        <th class="px-6 py-3">Image</th>
+                                        <th class="px-6 py-3">Price</th>
+                                        <th class="px-6 py-3">Total Images</th>
                                         <th class="px-6 py-3 rounded-e-lg">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($categories as $category)
+                                    @foreach ($products as $product)
                                         <tr>
                                             <td
                                                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                {{ $category->id }}</td>
-                                            <td class="px-6 py-4">{{ $category->name }}</td>
-                                            <td class="px-6 py-4">{{ $category->description }}</td>
-                                            {{-- <td class="px-6 py-4"><img src="{{ asset($category->image) }}" alt="Image"
-                                                class="h-24 w-24 border-gray-500 border-2 p-2 m-3 rounded" /></td> --}}
-                                            <td>
+                                                {{ $product->id }}</td>
+                                            <td class="px-6 py-4">{{ $product->name }}</td>
+                                            <td class="px-6 py-4">{{ $product->description }}</td>
+                                            <td class="px-6 py-4">{{ $product->price }}</td>
+                                            <td class="px-6 py-4">Total Images</td>
+                                            {{-- <td>
                                                 @if ($category->image)
                                                     <img src="{{ asset('storage/' . $category->image) }}"
                                                         class="h-24 w-24 border-gray-500 border-2 p-2 m-3 rounded">
                                                 @else
                                                     No Image
                                                 @endif
-                                            </td>
+                                            </td> --}}
                                             <td class="px-6 py-4">
                                                 <div class="flex gap-2">
-                                                    <x-secondary-button wire:click="edit({{ $category->id }})"
+                                                    {{-- <x-secondary-button wire:click="edit({{ $product->id }})"
+                                                        class="btn btn-primary">Images</x-secondary-button> --}}
+                                                    <x-secondary-button wire:click="edit({{ $product->id }})"
                                                         class="btn btn-primary">Edit</x-secondary-button>
-                                                    <x-secondary-button wire:click="delete({{ $category->id }})"
+                                                    <x-secondary-button wire:click="delete({{ $product->id }})"
                                                         class="btn btn-danger">Delete</x-secondary-button>
                                                 </div>
                                             </td>
@@ -117,9 +131,27 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                            {{ $categories->links() }}
+                            {{ $products->links() }}
                         </div>
                     </div>
+                    @if ($isEdit == true)
+                        <h1 class="text-2xl font-bold mt-4">Images Sections Here</h1>
+                        @if (session()->has('message-product-delete'))
+                            <div class="bg-green-500 text-white p-2">
+                                {{ session('message-product-delete') }}
+                            </div>
+                        @endif
+                        <div class="flex flex-wrap gap-4 mt-3 p-3">
+                            @foreach ($images as $productImage)
+                                <div class="flex-none rounded-lg border-solid border-2 border-blue-500 text-center p-2">
+                                    <img src="{{ asset('storage/' . $productImage->path) }}"
+                                        class="h-24 w-24 border-gray-500 border-2 p-2 m-3">
+                                    <x-secondary-button wire:click="deleteProductImage({{ $productImage->id }})"
+                                        class="btn btn-danger">Delete</x-secondary-button>
+                                </div>
+                            @endforeach
+                        </div>
+                    @endif
                     {{-- Default Setting End Here --}}
                 </div>
             </div>

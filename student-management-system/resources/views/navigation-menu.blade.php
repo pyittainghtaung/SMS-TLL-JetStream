@@ -30,6 +30,9 @@
                     <x-nav-link href="{{ route('categories') }}" :active="request()->routeIs('categories')">
                         {{ __('Category') }}
                     </x-nav-link>
+                    <x-nav-link href="{{ route('products') }}" :active="request()->routeIs('products')">
+                        {{ __('Product') }}
+                    </x-nav-link>
                     <x-nav-link href="{{ route('permissions') }}" :active="request()->routeIs('permissions')">
                         {{ __('Permission') }}
                     </x-nav-link>

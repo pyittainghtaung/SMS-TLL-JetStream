@@ -15,7 +15,6 @@ class Category extends Component
 
     public $isEdit = false;
     public $category_id, $name, $description, $image, $is_active = false;
-    // public $isChecked;
     public $search = '';
 
     protected $rules = [

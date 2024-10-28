@@ -14,15 +14,15 @@
                     <h1 class="text-2xl font-bold mb-4">_.: System Dashboard :._</h1>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div class="bg-gray-200 p-4"><a href="{{ route('academics') }}">Academic</a></div>
-                        <div class="bg-gray-200 p-4"><a href="{{ route('grades') }}">Grade</a></div>
-                        <div class="bg-gray-200 p-4"><a href="{{ route('sections') }}">Section</a></div>
-                        <div class="bg-gray-200 p-4"><a href="{{ route("permissions") }}">Permissions</a></div>
-                        <div class="bg-gray-200 p-4"><a href="{{ route("roles") }}">Roles</a></div>
-                        <div class="bg-gray-200 p-4"><a href="{{ route("users") }}">User</a></div>
+                        {{-- <div class="bg-gray-200 p-4"><a href="{{ route('grades') }}">Grade</a></div> --}}
+                        {{-- <div class="bg-gray-200 p-4"><a href="{{ route('sections') }}">Section</a></div> --}}
+                        <div class="bg-gray-200 p-4"><a href="{{ route('permissions') }}">Permissions</a></div>
+                        <div class="bg-gray-200 p-4"><a href="{{ route('roles') }}">Roles</a></div>
+                        <div class="bg-gray-200 p-4"><a href="{{ route('users') }}">User</a></div>
                     </div>
                     {{-- <div class="flex justify-between">           --}}
-                        {{-- <h1 class="text-2xl font-bold mb-4">_.: System Dashboard :._</h1> --}}
-                        {{-- <div
+                    {{-- <h1 class="text-2xl font-bold mb-4">_.: System Dashboard :._</h1> --}}
+                    {{-- <div
                             class="flex items-center justify-between gap-2 mb-8 text-right rounded-lg border-solid border-2 border-red-500 p-2">
 
                             <label for="search">Search</label>
@@ -93,6 +93,8 @@
                     {{-- Default Setting End Here --}}
                 </div>
             </div>
+            {{-- <livewire:Academic />
+            <livewire:Grade /> --}}
         </div>
     </div>
 </x-app-layout>

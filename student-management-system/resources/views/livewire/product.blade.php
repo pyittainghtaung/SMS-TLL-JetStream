@@ -12,7 +12,7 @@
                     <div class="flex justify-between">
                         <h1 class="text-2xl font-bold mb-4">All Products</h1>
                         <div
-                            class="flex items-center justify-between gap-2 mb-8 text-right rounded-lg border-solid border-2 border-green-500 p-2">
+                            class="flex items-center justify-between gap-2 mb-8 text-right rounded-lg border-solid border-2 border-yellow-500 p-2">
                             <label for="search">Search</label>
                             {{-- 7. Use wire:model.lazy
                             If you want the search property to only update after the input loses focus, you can try
@@ -101,7 +101,7 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($products as $product)
-                                        <tr>
+                                        <tr wire:key="{{ $product->id }}">
                                             <td
                                                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                                 {{ $product->id }}</td>

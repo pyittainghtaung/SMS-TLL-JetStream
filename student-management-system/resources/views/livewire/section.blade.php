@@ -1,8 +1,13 @@
 <div>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Sections') }}
+          {{ $academic_name }} > {{ $grade_name  }} > {{ __('Sections') }}
         </h2>
+        <h3>
+              <x-nav-link wire:navigate href="{{ route('grades',$academic_id) }}" :active="request()->routeIs('grades')">
+                        {{ __('Grades') }}
+                    </x-nav-link>
+        </h3>
     </x-slot>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -12,7 +17,7 @@
                     <div class="flex justify-between">
                         <h1 class="text-2xl font-bold mb-4">All Sections</h1>
                         <div
-                            class="flex items-center justify-between gap-2 mb-8 text-right rounded-lg border-solid border-2 border-green-500 p-2">
+                            class="flex items-center justify-between gap-2 mb-8 text-right rounded-lg border-solid border-2 border-yellow-500 p-2">
                             {{-- <x-link-button href="">Add New</x-link-button> --}}
                             {{-- HELLO --}}
                             <label for="search">Search</label>
@@ -38,7 +43,11 @@
                             <form wire:submit.prevent="{{ $isEdit ? 'update' : 'store' }}">
                                 <div class="mb-4">
                                     <label for="academic_id" class="block">Academic</label>
-                                    <select id="academic_id" wire:model="academic_id" class="border p-2 w-full"
+                                    <input type="text" wire:model="academic_name" class="border p-2 w-full" disabled>
+                                    @error('academic_name')
+                                        <span class="text-red-500 block">{{ $message }}</span>
+                                    @enderror
+                                    {{-- <select id="academic_id" wire:model="academic_id" class="border p-2 w-full"
                                         disabled>
                                         <option value="">-- Select Academic --</option>
                                         @foreach ($academics as $academic)
@@ -47,11 +56,15 @@
                                     </select>
                                     @error('academic_id')
                                         <span class="text-red-500 block">{{ $message }}</span>
-                                    @enderror
+                                    @enderror --}}
                                 </div>
                                 <div class="mb-4">
                                     <label for="grade" class="block">Grade</label>
-                                    <select id="grade_id" wire:model="grade_id" class="border p-2 w-full">
+                                    <input type="text" wire:model="grade_name" class="border p-2 w-full" disabled>
+                                    @error('grade_name')
+                                        <span class="text-red-500 block">{{ $message }}</span>
+                                    @enderror
+                                    {{-- <select id="grade_id" wire:model="grade_id" class="border p-2 w-full">
                                         <option value="">-- Select Grade --</option>
                                         @foreach ($grades as $grade)
                                             <option value="{{ $grade->id }}">{{ $grade->name }}</option>
@@ -59,7 +72,7 @@
                                     </select>
                                     @error('grade_id')
                                         <span class="text-red-500 block">{{ $message }}</span>
-                                    @enderror
+                                    @enderror --}}
                                 </div>
                                 <div class="mb-4">
                                     <label for="name" class="block">Name</label>
@@ -84,14 +97,14 @@
                                     class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
                                     <tr class="w-full">
                                         <th class="px-6 py-3 rounded-s-lg">ID</th>
-                                        <th class="px-6 py-3 rounded-s-lg">Grade</th>
+                                        <th class="px-6 py-3">Grade</th>
                                         <th class="px-6 py-3">Name</th>
                                         <th class="px-6 py-3 rounded-e-lg">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($sections as $section)
-                                        <tr>
+                                        <tr wire:key={{ $section->id }}>
                                             <td
                                                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                                 {{ $section->id }}</td>

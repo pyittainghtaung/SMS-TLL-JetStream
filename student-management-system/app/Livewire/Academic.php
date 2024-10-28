@@ -19,7 +19,8 @@ class Academic extends Component
     ];
     public function render()
     {
-        $academics = ModelsAcademic::where('name', 'like', '%' . $this->search . '%')->paginate(10);
+        // $academics = ModelsAcademic::where('name', 'like', '%' . $this->search . '%')->paginate(10);
+        $academics = ModelsAcademic::searchByName($this->search)->paginate(10);
         return view('livewire.academic', ['academics' => $academics]);
     }
     public function resetFields()
@@ -37,6 +38,7 @@ class Academic extends Component
         session()->flash('message', 'Academic Inserted successfully!');
         $this->resetFields();
     }
+
     public function edit($id)
     {
         $academic = ModelsAcademic::findOrFail($id);
@@ -44,6 +46,7 @@ class Academic extends Component
         $this->academic_id = $academic->id;
         $this->isEdit = true;
     }
+
     public function update()
     {
         $this->validate();

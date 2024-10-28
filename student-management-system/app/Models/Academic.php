@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -28,6 +29,23 @@ class Academic extends Model
     {
         return $this->hasMany(Hostel::class);
     }
+    public function students(): HasMany
+    {
+        return $this->hasMany(Student::class);
+    }
+
+    // Local Query Scope Methods Start Here
+    public function scopeSearchByName(Builder $query, string $search): Builder
+    {
+        return $query->where('name', 'like', '%' . $search . '%');
+    }
+
+
+    //  Add Addtional Local Query Scope Methods Here
+
+    // Local Query Scope Methods Ends Here
+
+
     public static function boot()
     {
         parent::boot();

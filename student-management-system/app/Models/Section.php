@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -23,5 +24,10 @@ class Section extends Model
     public function grade(): BelongsTo
     {
         return $this->belongsTo(Grade::class);
+    }
+
+    public function scopeFilterByGradeAndSection(Builder $query, $gradeId, string $search): Builder
+    {
+        return $query->where('grade_id', $gradeId)->where('name', 'like', '%' . $search . '%');
     }
 }

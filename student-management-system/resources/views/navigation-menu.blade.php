@@ -12,34 +12,34 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+                    <x-nav-link wire:navigate href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                    <x-nav-link href="{{ route('academics') }}" :active="request()->routeIs('academics')">
+                    <x-nav-link wire:navigate href="{{ route('academics') }}" :active="request()->routeIs('academics')">
                         {{ __('Academic') }}
                     </x-nav-link>
-                    <x-nav-link href="{{ route('grades') }}" :active="request()->routeIs('grades')">
+                    {{-- <x-nav-link wire:navigate href="{{ route('grades') }}" :active="request()->routeIs('grades')">
                         {{ __('Grade') }}
-                    </x-nav-link>
-                    <x-nav-link href="{{ route('sections') }}" :active="request()->routeIs('sections')">
+                    </x-nav-link> --}}
+                    {{-- <x-nav-link wire:navigate href="{{ route('sections') }}" :active="request()->routeIs('sections')">
                         {{ __('Section') }}
-                    </x-nav-link>
-                    <x-nav-link href="{{ route('hostels') }}" :active="request()->routeIs('hostels')">
+                    </x-nav-link> --}}
+                    {{-- <x-nav-link wire:navigate href="{{ route('hostels') }}" :active="request()->routeIs('hostels')">
                         {{ __('Hostel') }}
-                    </x-nav-link>
-                    <x-nav-link href="{{ route('categories') }}" :active="request()->routeIs('categories')">
+                    </x-nav-link> --}}
+                    <x-nav-link wire:navigate href="{{ route('categories') }}" :active="request()->routeIs('categories')">
                         {{ __('Category') }}
                     </x-nav-link>
-                    <x-nav-link href="{{ route('products') }}" :active="request()->routeIs('products')">
+                    <x-nav-link wire:navigate href="{{ route('products') }}" :active="request()->routeIs('products')">
                         {{ __('Product') }}
                     </x-nav-link>
-                    <x-nav-link href="{{ route('permissions') }}" :active="request()->routeIs('permissions')">
+                    <x-nav-link wire:navigate href="{{ route('permissions') }}" :active="request()->routeIs('permissions')">
                         {{ __('Permission') }}
                     </x-nav-link>
-                    <x-nav-link href="{{ route('roles') }}" :active="request()->routeIs('roles')">
+                    <x-nav-link wire:navigate href="{{ route('roles') }}" :active="request()->routeIs('roles')">
                         {{ __('Role') }}
                     </x-nav-link>
-                    <x-nav-link href="{{ route('users') }}" :active="request()->routeIs('users')">
+                    <x-nav-link wire:navigate href="{{ route('users') }}" :active="request()->routeIs('users')">
                         {{ __('User') }}
                     </x-nav-link>
                 </div>

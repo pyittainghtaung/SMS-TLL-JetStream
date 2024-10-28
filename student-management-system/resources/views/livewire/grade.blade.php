@@ -1,7 +1,7 @@
 <div>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Grades') }}
+          {{ $academic_name }} > {{ __('Grades') }}
         </h2>
     </x-slot>
     <div class="py-12">
@@ -12,7 +12,7 @@
                     <div class="flex justify-between">
                         <h1 class="text-2xl font-bold mb-4">All Grades</h1>
                         <div
-                            class="flex items-center justify-between gap-2 mb-8 text-right rounded-lg border-solid border-2 border-green-500 p-2">
+                            class="flex items-center justify-between gap-2 mb-8 text-right rounded-lg border-solid border-2 border-yellow-500 p-2">
                             {{-- <x-link-button href="">Add New</x-link-button> --}}
                             {{-- HELLO --}}
                             <label for="search">Search</label>
@@ -28,7 +28,7 @@
                     </div>
                     {{-- <div class="flex justify-between border-solid border-2 border-indigo-600 p-2"> --}}
                     <div class="flex justify-between flex-col sm:flex-row gap-2">
-                        <div class="basis-1/3 rounded-lg border-solid border-2 border-green-500 p-2">
+                        <div class="h-[300px] basis-1/3 rounded-lg border-solid border-2 border-green-500 p-2">
                             @if (session()->has('message'))
                                 <div class="bg-green-500 text-white p-2">
                                     {{ session('message') }}
@@ -38,14 +38,15 @@
                             <form wire:submit.prevent="{{ $isEdit ? 'update' : 'store' }}">
                                 <div class="mb-4">
                                     <label for="academic_id" class="block">Academic</label>
-                                    <select id="academic_id" wire:model="selectedAcademicId" class="border p-2 w-full"
+                                    <input type="text" wire:model="academic_name" class="border p-2 w-full" disabled>
+                                    {{-- <select id="academic_id" wire:model="selectedAcademicId" class="border p-2 w-full"
                                         disabled>
                                         <option value="">-- Select Academic --</option>
                                         @foreach ($academics as $academic)
                                             <option value="{{ $academic->id }}">{{ $academic->name }}</option>
                                         @endforeach
-                                    </select>
-                                    @error('selectedAcademicId')
+                                    </select> --}}
+                                    @error('academic_id')
                                         <span class="text-red-500 block">{{ $message }}</span>
                                     @enderror
                                 </div>
@@ -78,13 +79,14 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($grades as $grade)
-                                        <tr>
+                                        <tr wire:key="{{ $grade->id }}">
                                             <td
                                                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                                 {{ $grade->id }}</td>
                                             <td class="px-6 py-4">{{ $grade->name }}</td>
                                             <td class="px-6 py-4">
                                                 <div class="flex gap-2">
+                                                    <a wire:navigate href="{{ route('sections', ['grade' => $grade->id]) }}">Sections</a>
                                                     <x-secondary-button wire:click="edit({{ $grade->id }})"
                                                         class="btn btn-primary">Edit</x-secondary-button>
                                                     <x-secondary-button wire:click="delete({{ $grade->id }})"

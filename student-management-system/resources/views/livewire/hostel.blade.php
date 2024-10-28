@@ -12,7 +12,7 @@
                     <div class="flex justify-between">
                         <h1 class="text-2xl font-bold mb-4">All Hostels</h1>
                         <div
-                            class="flex items-center justify-between gap-2 mb-8 text-right rounded-lg border-solid border-2 border-green-500 p-2">
+                            class="flex items-center justify-between gap-2 mb-8 text-right rounded-lg border-solid border-2 border-yellow-500 p-2">
                             {{-- <x-link-button href="">Add New</x-link-button> --}}
                             {{-- HELLO --}}
                             <label for="search">Search</label>
@@ -38,14 +38,15 @@
                             <form wire:submit.prevent="{{ $isEdit ? 'update' : 'store' }}">
                                 <div class="mb-4">
                                     <label for="academic_id" class="block">Academic</label>
-                                    <select id="academic_id" wire:model="selectedAcademicId" class="border p-2 w-full"
+                                    <input type="text" wire:model="academic_name" class="border p-2 w-full" disabled>
+                                    {{-- <select id="academic_id" wire:model="selectedAcademicId" class="border p-2 w-full"
                                         disabled>
                                         <option value="">-- Select Academic --</option>
                                         @foreach ($academics as $academic)
                                             <option value="{{ $academic->id }}">{{ $academic->name }}</option>
                                         @endforeach
-                                    </select>
-                                    @error('selectedAcademicId')
+                                    </select> --}}
+                                    @error('academic_id')
                                         <span class="text-red-500 block">{{ $message }}</span>
                                     @enderror
                                 </div>
@@ -94,7 +95,7 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($hostels as $hostel)
-                                        <tr>
+                                        <tr wire:key="{{ $hostel->id }}">
                                             <td
                                                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                                 {{ $hostel->id }}</td>

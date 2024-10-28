@@ -12,7 +12,7 @@
                     <div class="flex justify-between">
                         <h1 class="text-2xl font-bold mb-4">All Users</h1>
                         <div
-                            class="flex items-center justify-between gap-2 mb-8 text-right rounded-lg border-solid border-2 border-green-500 p-2">
+                            class="flex items-center justify-between gap-2 mb-8 text-right rounded-lg border-solid border-2 border-yellow-500 p-2">
                             {{-- <x-link-button href="">Add New</x-link-button> --}}
                             {{-- HELLO --}}
                             <label for="search">Search</label>

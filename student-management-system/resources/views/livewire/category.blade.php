@@ -12,7 +12,7 @@
                     <div class="flex justify-between">
                         <h1 class="text-2xl font-bold mb-4">All Products</h1>
                         <div
-                            class="flex items-center justify-between gap-2 mb-8 text-right rounded-lg border-solid border-2 border-green-500 p-2">
+                            class="flex items-center justify-between gap-2 mb-8 text-right rounded-lg border-solid border-2 border-yellow-500 p-2">
                             <label for="search">Search</label>
                             {{-- 7. Use wire:model.lazy
                             If you want the search property to only update after the input loses focus, you can try
@@ -26,7 +26,7 @@
                     </div>
                     {{-- <div class="flex justify-between border-solid border-2 border-indigo-600 p-2"> --}}
                     <div class="flex justify-between flex-col sm:flex-row gap-2">
-                        <div class="basis-1/3 rounded-lg border-solid border-2 border-green-500 p-2">
+                        <div class="h-[400px] basis-1/3 rounded-lg border-solid border-2 border-green-500 p-2">
                             @if (session()->has('message'))
                                 <div class="bg-green-500 text-white p-2">
                                     {{ session('message') }}
@@ -89,7 +89,7 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($categories as $category)
-                                        <tr>
+                                        <tr wire:key="{{ $category->id }}">
                                             <td
                                                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                                 {{ $category->id }}</td>

@@ -12,7 +12,7 @@
                     <div class="flex justify-between">
                         <h1 class="text-2xl font-bold mb-4">All Permissions</h1>
                         <div
-                            class="flex items-center justify-between gap-2 mb-8 text-right rounded-lg border-solid border-2 border-green-500 p-2">
+                            class="flex items-center justify-between gap-2 mb-8 text-right rounded-lg border-solid border-2 border-yellow-500 p-2">
                             {{-- <x-link-button href="">Add New</x-link-button> --}}
                             {{-- HELLO --}}
                             <label for="search">Search</label>
@@ -65,7 +65,7 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($permissions as $permission)
-                                        <tr>
+                                        <tr wire:key="{{ $permission->id }}">
                                             <td
                                                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                                 {{ $permission->id }}</td>

@@ -11,37 +11,43 @@ use Livewire\WithPagination;
 class Grade extends Component
 {
     use WithPagination;
+
+    public Academic $academic;
     public $isEdit = false;
-    public  $grade_id, $name;
-    public $academic_id;
+    public $grade_id, $name;
+    public $academic_id, $academic_name;
     public $search = '';
 
-    public $academics; // To hold the list of academics
-    public $selectedAcademicId; // To hold the selected academic_id
+    // public $academics; // To hold the list of academics
+    // public $selectedAcademicId; // To hold the selected academic_id
 
     protected $rules = [
         'academic_id' => 'required|exists:academics,id',
         'name' => 'required|string|unique:grades,name',
     ];
 
+    public function mount(Academic $academic)
+    {
+        $this->academic = $academic;
+        $this->academic_id = $this->academic->id;
+        $this->academic_name = $this->academic->name;
+    }
+
     public function render()
     {
-        $this->academics = Academic::all();
-        // Set the last academic_id as the selected value
-        $this->selectedAcademicId = Academic::latest('id')->first()->id ?? null;
-        $grades = ModelsGrade::where('name', 'like', '%' . $this->search . '%')->paginate(10);
+        $grades = ModelsGrade::filterByAcademicAndGrade($this->academic_id, $this->search)->paginate(10);
         return view('livewire.grade', ['grades' => $grades]);
     }
+
     public function resetFields()
     {
         $this->name = '';
-        $this->academic_id = null;
         $this->grade_id = null;
         $this->isEdit = false;
     }
+
     public function store()
     {
-        $this->academic_id = $this->selectedAcademicId;
         $this->validate([
             'academic_id' => 'required|exists:academics,id',
             'name' => [

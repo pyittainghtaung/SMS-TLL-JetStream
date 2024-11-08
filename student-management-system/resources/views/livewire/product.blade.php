@@ -123,7 +123,7 @@
                                                         class="btn btn-primary">Images</x-secondary-button> --}}
                                                     <x-secondary-button wire:click="edit({{ $product->id }})"
                                                         class="btn btn-primary">Edit</x-secondary-button>
-                                                    <x-secondary-button wire:click="delete({{ $product->id }})"
+                                                    <x-secondary-button wire:click="delete({{ $product->id }})" wire:confirm="Are you sure you want to delete this product?"
                                                         class="btn btn-danger">Delete</x-secondary-button>
                                                 </div>
                                             </td>

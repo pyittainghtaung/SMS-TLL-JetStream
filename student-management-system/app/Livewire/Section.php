@@ -56,7 +56,9 @@ class Section extends Component
             'academic_id' => $this->academic_id,
             'grade_id' => $this->grade_id,
         ]);
+
         session()->flash('message', 'Section Inserted successfully!');
+
         $this->resetFields();
     }
     public function edit($id)

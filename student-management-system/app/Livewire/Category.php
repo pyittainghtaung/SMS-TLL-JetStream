@@ -24,6 +24,7 @@ class Category extends Component
         'is_active' => 'boolean',
     ];
 
+    // #[Layout('layouts.guest')]
     public function render()
     {
         $categories = ModelsCategory::where('name', 'like', '%' . $this->search . '%')->paginate(10);

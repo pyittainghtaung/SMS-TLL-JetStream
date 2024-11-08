@@ -27,7 +27,7 @@ class Product extends Component
         'description' => 'sometimes',
         'price' => 'required|numeric|min:0',
         'category_id' => 'required|exists:categories,id',
-        'images.*' => 'nullable|mimes:png,jpg,jpeg',
+        'images.*' => 'nullable|mimes:png,jpg,jpeg'
     ];
 
     public function render()

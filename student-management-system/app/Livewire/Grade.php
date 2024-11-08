@@ -46,6 +46,7 @@ class Grade extends Component
         $this->isEdit = false;
     }
 
+
     public function store()
     {
         $this->validate([
@@ -62,7 +63,8 @@ class Grade extends Component
             'academic_id' => $this->academic_id,
             'name' => $this->name,
         ]);
-        session()->flash('message', 'Grade Inserted successfully!');
+        // session()->flash('message', 'Grade Inserted successfully!');
+        $this->js("alert('Grade was successfully saved!')");
         $this->resetFields();
     }
 
@@ -82,7 +84,8 @@ class Grade extends Component
         $grade->update([
             'name' => $this->name,
         ]);
-        session()->flash('message', 'Grade Updated successfully!');
+        // session()->flash('message', 'Grade Updated successfully!');
+        $this->js("alert('Grade was successfully Updated!')");
         $this->resetFields();
     }
 
@@ -96,5 +99,6 @@ class Grade extends Component
     {
         ModelsGrade::findOrFail($id)->delete();
         $this->resetFields();
+        $this->js("alert('Grade was deleted!')");
     }
 }

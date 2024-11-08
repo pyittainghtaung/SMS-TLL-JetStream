@@ -57,11 +57,13 @@ class Academic extends Model
                 $academic->grades()->forceDelete();
                 $academic->sections()->forceDelete();
                 $academic->hostels()->forceDelete();
+                $academic->students()->forceDelete();
             } else {
                 // If soft deleting, just soft delete related grades
                 $academic->grades()->delete();
                 $academic->sections()->delete();
                 $academic->hostels()->delete();
+                $academic->students()->delete();
             }
         });
         // Handle restore event to restore the grades
@@ -69,6 +71,7 @@ class Academic extends Model
             $academic->grades()->withTrashed()->restore();
             $academic->sections()->withTrashed()->restore();
             $academic->hostels()->withTrashed()->restore();
+            $academic->students()->withTrashed()->restore();
         });
     }
 }

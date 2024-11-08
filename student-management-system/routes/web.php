@@ -9,6 +9,7 @@ use App\Livewire\Product;
 use App\Livewire\Role;
 use App\Livewire\Section;
 use App\Livewire\Student;
+use App\Livewire\Teacher;
 use App\Livewire\User;
 use Illuminate\Support\Facades\Route;
 
@@ -30,6 +31,7 @@ Route::middleware([
     Route::get('grades/{grade}/sections', Section::class)->name('sections');
     Route::get('academic/{academic}/hostels', Hostel::class)->name('hostels');
     Route::get('academic/{academic}/students', Student::class)->name('students');
+    Route::get('academic/{academic}/teachers', Teacher::class)->name('teachers');
 
     Route::get('categories', Category::class)->name('categories');
     Route::get('products', Product::class)->name('products');

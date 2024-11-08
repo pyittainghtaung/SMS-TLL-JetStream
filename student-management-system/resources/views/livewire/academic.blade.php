@@ -69,7 +69,44 @@
                             </form>
                         </div>
                         <div class="basis-2/3 overflow-x-auto rounded-lg border-solid border-2 border-red-500 p-2">
-                            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                            @foreach ($academics as $academic)
+                                <div wire:key="{{ $academic->id }}"
+                                    class="flex flex-col bg-white border shadow-sm rounded-xl p-4 md:p-5 dark:bg-neutral-900 dark:border-neutral-700 dark:shadow-neutral-700/70 mt-2">
+                                    <h3 class="text-lg font-bold text-gray-800 dark:text-white">
+                                        {{ $academic->name }}
+                                    </h3>
+                                    {{-- <p class="mt-1 text-xs font-medium uppercase text-gray-500 dark:text-neutral-500">
+                                        Card subtitle
+                                    </p> --}}
+                                    {{-- <p class="mt-2 text-gray-500 dark:text-neutral-400">
+                                        Some quick example text to build on the card title and make up the bulk of the
+                                        card's content.
+                                    </p> --}}
+                                    {{-- <a class="mt-3 inline-flex items-center gap-x-1 text-sm font-semibold rounded-lg border border-transparent text-blue-600 decoration-2 hover:text-blue-700 hover:underline focus:underline focus:outline-none focus:text-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:text-blue-500 dark:hover:text-blue-600 dark:focus:text-blue-600"
+                                        href="#">
+                                        Card link
+                                    </a> --}}
+                                    <div class="flex gap-2 mt-2 mb-2">
+                                        <a wire:navigate
+                                            href="{{ route('students', ['academic' => $academic->id]) }}">Students</a>
+                                        <a wire:navigate
+                                            href="{{ route('hostels', ['academic' => $academic->id]) }}">Hostels</a>
+                                        <a wire:navigate
+                                            href="{{ route('grades', ['academic' => $academic->id]) }}">Grades</a>
+                                        <a wire:navigate
+                                            href="{{ route('teachers', ['academic' => $academic->id]) }}">Teachers</a>
+                                    </div>
+                                    <div>
+                                        <x-secondary-button wire:click="edit({{ $academic->id }})"
+                                            class="btn btn-primary">Edit</x-secondary-button>
+                                        <x-secondary-button wire:click="delete({{ $academic->id }})"
+                                            class="btn btn-danger">Delete</x-secondary-button>
+                                    </div>
+                                </div>
+                            @endforeach
+
+
+                            {{-- <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                 <thead
                                     class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
                                     <tr class="w-full">
@@ -87,9 +124,12 @@
                                             <td class="px-6 py-4">{{ $academic->name }}</td>
                                             <td class="px-6 py-4">
                                                 <div class="flex gap-2">
-                                                    <a wire:navigate href="{{ route('students', ['academic' => $academic->id]) }}">Students</a>
-                                                    <a wire:navigate href="{{ route('hostels', ['academic' => $academic->id]) }}">Hostels</a>
-                                                    <a wire:navigate href="{{ route('grades', ['academic' => $academic->id]) }}">Grades</a>
+                                                    <a wire:navigate
+                                                        href="{{ route('students', ['academic' => $academic->id]) }}">Students</a>
+                                                    <a wire:navigate
+                                                        href="{{ route('hostels', ['academic' => $academic->id]) }}">Hostels</a>
+                                                    <a wire:navigate
+                                                        href="{{ route('grades', ['academic' => $academic->id]) }}">Grades</a>
                                                     <x-secondary-button wire:click="edit({{ $academic->id }})"
                                                         class="btn btn-primary">Edit</x-secondary-button>
                                                     <x-secondary-button wire:click="delete({{ $academic->id }})"
@@ -99,7 +139,7 @@
                                         </tr>
                                     @endforeach
                                 </tbody>
-                            </table>
+                            </table> --}}
                             {{ $academics->links() }}
                         </div>
                     </div>
@@ -109,4 +149,3 @@
         </div>
     </div>
 </div>
-
